@@ -1,4 +1,5 @@
 # DUBLIN BIKES: SURPLUS/DEFICIT OPTIMIZATION DASHBOARD
+pip install plotly
 import streamlit as st
 import pandas as pd
 import numpy as np
