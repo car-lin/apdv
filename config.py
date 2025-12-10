@@ -1,7 +1,7 @@
 import os
 # Configurations
-POSTGRES_DSN = os.getenv("POSTGRES_URI", "postgresql://postgres:admin@123@db.pmewpbajtowvustznmqs.supabase.co:5432/postgres/bikes")
-MONGO_URI = os.getenv("MONGO_URI", "mongodb+srv://carline_db_user:admin@123@bikessurplusdeficit.ahrspks.mongodb.net/?appName=bikesSurplusDeficit")
+POSTGRES_DSN = os.getenv("POSTGRES_URI", "postgresql://postgres:admin%40123@db.pmewpbajtowvustznmqs.supabase.co:5432/postgres/bikes")
+MONGO_URI = os.getenv("MONGO_URI", "mongodb+srv://carline_db_user:admin%40123@bikessurplusdeficit.ahrspks.mongodb.net/?appName=bikesSurplusDeficit")
 
 # Data Sources
 CSV_URL = "https://data.smartdublin.ie/dataset/dublinbikes-api/resource/168f55b8-1c3d-4fd3-95b9-f92f388c772a/download"
