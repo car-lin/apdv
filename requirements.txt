@@ -1,0 +1,11 @@
+pandas
+numpy
+requests
+sqlalchemy
+psycopg2-binary
+pymongo
+streamlit
+plotly
+scikit-learn
+scipy
+prefect
