@@ -1,0 +1,29 @@
+name: ETL Pipeline
+
+# Triggers
+on:
+  schedule:
+    - cron: "0 * * * *"  # Runs every hour
+  workflow_dispatch:      # Manual trigger
+
+jobs:
+  run-etl:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run ETL script
+        env:
+          MONGO_URI: ${{ secrets.MONGO_URI }}
+          DATABASE_URL: ${{ secrets.POSTGRES_URI }}
+        run: python pipeline.py
