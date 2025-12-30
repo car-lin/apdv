@@ -17,7 +17,6 @@ warnings.filterwarnings('ignore')
 st.set_page_config(page_title="Dublin Bikes Dashboard", layout="wide")
 
 # Database connection
-#engine = create_engine("postgresql://postgres:admin@localhost:5432/bikes")
 @st.cache_resource
 def get_engine():
     return create_engine(
