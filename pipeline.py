@@ -6,11 +6,9 @@ from load import load_historical_to_postgres, load_realtime_to_postgres
 from schema import create_tables
 from urllib.parse import urlparse
 import config
-import psycopg2
-
 
 POSTGRES_DSN = config.POSTGRES_DSN
-parsed = urlparse(POSTGRES_DSN)
+'''parsed = urlparse(POSTGRES_DSN)
 db_name = parsed.path.lstrip('/')
 try:
     engine = create_engine(POSTGRES_DSN)
@@ -42,7 +40,7 @@ except:
     
     print(f"Database '{db_name}' created!")
     engine = create_engine(POSTGRES_DSN)
-    '''master_engine = create_engine("postgresql://postgres:admin@localhost:5432/postgres")
+    master_engine = create_engine("postgresql://postgres:admin@localhost:5432/postgres")
     with master_engine.connect() as conn:
         query = "CREATE DATABASE " + db_name
         conn.execute(text(query))
