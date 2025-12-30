@@ -1,7 +1,8 @@
 import os
 # Configurations
-POSTGRES_DSN = os.environ["POSTGRES_URI"]
-MONGO_URI = os.environ["MONGO_URI"]
+
+POSTGRES_DSN = os.getenv("POSTGRES_URI")
+MONGO_URI = os.getenv("MONGO_URI")
 #POSTGRES_DSN = os.getenv("POSTGRES_URI", "postgresql://postgres:admin%40123@db.pmewpbajtowvustznmqs.supabase.co:5432/bikes")
 #MONGO_URI = os.getenv("MONGO_URI", "mongodb+srv://carline_db_user:admin%40123@bikessurplusdeficit.ahrspks.mongodb.net/?appName=bikesSurplusDeficit")
 
