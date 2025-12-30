@@ -1,6 +1,5 @@
 from io import StringIO
 from sqlalchemy import create_engine, text
-import psycopg2
 
 def load_historical_to_postgres(df_csv, engine):
     print("   1.3 Bulk Insert to PostgreSQL...")
