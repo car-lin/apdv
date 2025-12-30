@@ -9,6 +9,7 @@ import warnings
 from sklearn.metrics.pairwise import haversine_distances
 from scipy.optimize import linear_sum_assignment
 from sklearn.cluster import DBSCAN
+import config
 
 warnings.filterwarnings('ignore')
 
@@ -20,7 +21,7 @@ st.set_page_config(page_title="Dublin Bikes Dashboard", layout="wide")
 @st.cache_resource
 def get_engine():
     return create_engine(
-        st.secrets["POSTGRES_URI"],
+        config.POSTGRES_URI,
         pool_pre_ping=True,
         pool_recycle=300
     )
