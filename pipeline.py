@@ -7,7 +7,7 @@ from schema import create_tables
 from urllib.parse import urlparse
 import config
 
-POSTGRES_DSN = config.POSTGRES_DSN
+POSTGRES_DSN = config.POSTGRES_URI
 '''parsed = urlparse(POSTGRES_DSN)
 db_name = parsed.path.lstrip('/')
 try:
