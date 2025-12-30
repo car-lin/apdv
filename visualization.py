@@ -17,7 +17,15 @@ st.set_page_config(page_title="Dublin Bikes Dashboard", layout="wide")
 
 # Database connection
 #engine = create_engine("postgresql://postgres:admin@localhost:5432/bikes")
-engine = create_engine(st.secrets["POSTGRES_URI"], pool_pre_ping=True)
+@st.cache_resource
+def get_engine():
+    return create_engine(
+        st.secrets["POSTGRES_URI"],
+        pool_pre_ping=True,
+        pool_recycle=300
+    )
+
+engine = get_engine()
 
 st.title("DUBLIN BIKES: SURPLUS/DEFICIT OPTIMIZATION DASHBOARD")
 
@@ -30,22 +38,26 @@ if start_hour > end_hour:
     st.error("Invalid Time period. The Start hour must be lesser than the End hour.")
     st.stop()
 
-# Load data for time range 
 @st.cache_data(ttl=300)
 def load_data(start_h, end_h):
     query = text("""
         SELECT station_id, name, capacity, lat, lon, last_reported, 
                num_bikes_available, num_docks_available, utilization, imbalance, hour
         FROM historical_stations 
-        WHERE DATE(last_reported) = '2024-09-01' AND hour BETWEEN :start AND :end
+        WHERE DATE(last_reported) = '2024-09-01'
+          AND hour BETWEEN :start AND :end
     """)
-    df = pd.read_sql(query, engine, params={'start': start_h, 'end': end_h})
-    
-    df_rt = pd.read_sql("""
-        SELECT station_id, name, capacity, latitude as lat, longitude as lon, 
-               num_bikes_available, num_docks_available, utilization
-        FROM realtime_stations WHERE snapshot_id = (SELECT MAX(snapshot_id) FROM realtime_stations)
-    """, engine)
+
+    with engine.connect() as conn:
+        df = pd.read_sql(query, conn, params={'start': start_h, 'end': end_h})
+        df_rt = pd.read_sql("""
+            SELECT station_id, name, capacity,
+                   latitude AS lat, longitude AS lon,
+                   num_bikes_available, num_docks_available, utilization
+            FROM realtime_stations
+            WHERE snapshot_id = (SELECT MAX(snapshot_id) FROM realtime_stations)
+        """, conn)
+
     return df, df_rt
 
 df, df_rt = load_data(start_hour, end_hour)
