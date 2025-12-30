@@ -9,6 +9,7 @@ import warnings
 from sklearn.metrics.pairwise import haversine_distances
 from scipy.optimize import linear_sum_assignment
 from sklearn.cluster import DBSCAN
+import urllib.parse
 import config
 
 warnings.filterwarnings('ignore')
@@ -16,11 +17,16 @@ warnings.filterwarnings('ignore')
 # Page config
 st.set_page_config(page_title="Dublin Bikes Dashboard", layout="wide")
 
+# Encode password safely
+password = urllib.parse.quote_plus("admin@123")  # encode @ as %40
+
+POSTGRES_URI = f"postgresql+psycopg2://postgres:{password}@db.pmewpbajtowvustznmqs.supabase.co:5432/postgres?sslmode=require"
+
 # Database connection
 @st.cache_resource
 def get_engine():
     return create_engine(
-        config.POSTGRES_URI,
+        POSTGRES_URI,
         pool_pre_ping=True,
         pool_recycle=300
     )
