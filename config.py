@@ -1,7 +1,7 @@
 import os
 # Configurations
 
-POSTGRES_DSN = os.getenv("POSTGRES_URI", "postgresql+psycopg://postgres:admin%40123@db.pmewpbajtowvustznmqs.supabase.co:5432/bikes")
+POSTGRES_URI = os.getenv("POSTGRES_URI", "postgresql+psycopg://postgres:admin%40123@db.pmewpbajtowvustznmqs.supabase.co:5432/bikes")
 MONGO_URI = os.getenv("MONGO_URI", "mongodb+srv://carline_db_user:admin%40123@bikessurplusdeficit.ahrspks.mongodb.net/?appName=bikesSurplusDeficit")
 
 # Data Sources
