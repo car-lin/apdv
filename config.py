@@ -1,14 +1,29 @@
 import os
-# Configurations
 
-POSTGRES_URI = os.getenv("POSTGRES_URI", "postgresql+psycopg2://postgres:admin%40123@db.pmewpbajtowvustznmqs.supabase.co:5432/postgres")
-MONGO_URI = os.getenv("MONGO_URI", "mongodb+srv://carline_db_user:admin%40123@bikessurplusdeficit.ahrspks.mongodb.net/?appName=bikesSurplusDeficit")
+# ── Configurations ────────────────────────────────────────────────────────────
+# All secrets must be set as environment variables (locally via .env or shell
+# export; on Streamlit Cloud via App Settings → Secrets).
+# NEVER hard-code credentials here.
 
-# Data Sources
-CSV_URL = "https://data.smartdublin.ie/dataset/dublinbikes-api/resource/168f55b8-1c3d-4fd3-95b9-f92f388c772a/download"
-GBFS_STATUS_URL = "https://api.cyclocity.fr/contracts/dublin/gbfs/station_status.json"
-GBFS_INFO_URL = "https://api.cyclocity.fr/contracts/dublin/gbfs/station_information.json"
+POSTGRES_URI = os.getenv("POSTGRES_URI")
+MONGO_URI    = os.getenv("MONGO_URI")
 
-# ETL Settings
-HISTORICAL_DATE = "2024-09-01"
-GBFS_SNAPSHOTS = 20
+if not POSTGRES_URI:
+    raise EnvironmentError(
+        "POSTGRES_URI environment variable is not set. "
+        "Add it to your .streamlit/secrets.toml or Streamlit Cloud secrets."
+    )
+if not MONGO_URI:
+    raise EnvironmentError(
+        "MONGO_URI environment variable is not set. "
+        "Add it to your .streamlit/secrets.toml or Streamlit Cloud secrets."
+    )
+
+# ── Data Sources ──────────────────────────────────────────────────────────────
+CSV_URL          = "https://data.smartdublin.ie/dataset/dublinbikes-api/resource/168f55b8-1c3d-4fd3-95b9-f92f388c772a/download"
+GBFS_STATUS_URL  = "https://api.cyclocity.fr/contracts/dublin/gbfs/station_status.json"
+GBFS_INFO_URL    = "https://api.cyclocity.fr/contracts/dublin/gbfs/station_information.json"
+
+# ── ETL Settings ──────────────────────────────────────────────────────────────
+HISTORICAL_DATE  = "2024-09-01"
+GBFS_SNAPSHOTS   = 20
