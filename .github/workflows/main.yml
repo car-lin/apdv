@@ -1,6 +1,5 @@
 name: ETL Pipeline
 
-# Triggers
 on:
   schedule:
     - cron: "0 * * * *"  # Runs every hour
@@ -9,7 +8,6 @@ on:
 jobs:
   run-etl:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -24,6 +22,6 @@ jobs:
 
       - name: Run ETL script
         env:
+          POSTGRES_URI: ${{ secrets.POSTGRES_URI }}  # ✅ fixed name
           MONGO_URI: ${{ secrets.MONGO_URI }}
-          DATABASE_URL: ${{ secrets.POSTGRES_URI }}
         run: python pipeline.py
