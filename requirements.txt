@@ -7,6 +7,7 @@ pymongo[srv]
 plotly
 scikit-learn
 scipy
-prefect==2.19.0
 streamlit>=1.32.0
 altair>=5.0.0
+prefect==2.10.21
+griffe==0.28.1
