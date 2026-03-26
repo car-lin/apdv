@@ -46,7 +46,6 @@ def create_tables(engine):
 
     print("Creating PostgreSQL tables (if they don't already exist)...")
     with engine.connect() as conn:
-        # ✅ Removed DROP TABLE — CREATE TABLE IF NOT EXISTS is idempotent and safe
         conn.execute(text(historical_table_sql))
         conn.execute(text(realtime_table_sql))
         conn.commit()
