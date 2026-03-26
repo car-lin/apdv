@@ -22,6 +22,6 @@ jobs:
 
       - name: Run ETL script
         env:
-          POSTGRES_URI: ${{ secrets.POSTGRES_URI }}  # ✅ fixed name
+          POSTGRES_URI: ${{ secrets.POSTGRES_URI }}  
           MONGO_URI: ${{ secrets.MONGO_URI }}
-        run: python pipeline.py
+        run: python etl/pipeline.py
