@@ -39,9 +39,6 @@ Streamlit Cloud runs on ephemeral infrastructure with dynamic IP addresses, whic
 **Inconsistent GBFS API responses**
 The real-time Cyclocity GBFS API returns station status and station information as two separate endpoints that must be joined on `station_id`. Field names were inconsistent across response versions (`lat` vs `latitude`, `lon` vs `longitude`), requiring defensive extraction logic in the transform layer to avoid silent null injection into the database.
 
-**Dependency conflicts across environments**
-Pinning compatible versions of Streamlit, Altair, Prefect, and griffe across Python 3.10 (GitHub Actions) and Python 3.13 (Streamlit Cloud) was non-trivial. Prefect introduced transitive dependency conflicts with `griffe` and `anyio` that were ultimately resolved by removing Prefect entirely and delegating scheduling to GitHub Actions natively, which also simplified the codebase significantly.
-
 ---
 
 ## Results / Impact
